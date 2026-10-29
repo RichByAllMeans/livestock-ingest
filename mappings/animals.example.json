@@ -3,21 +3,33 @@
   "entity": "animals",
   "target_table": "animals",
   "mappings": {
-    "TAG NO":     "tag_number",
-    "ANIMAL NAME":"name",
-    "SEX":        "sex",
-    "DOB":        "date_of_birth",
-    "BREED":      "breed_id",
-    "ORIGIN":     "origin",
-    "STATUS":     "status"
+    "TAG NO":          "tag_number",
+    "RFID":            "rfid_code",
+    "ANIMAL NAME":     "name",
+    "SPECIES":         "species",
+    "SEX":             "sex",
+    "DOB":             "date_of_birth",
+    "BREED":           "breed_id",
+    "BREED NAME":      "breed_name_raw",
+    "ORIGIN":          "origin",
+    "ORIGIN SOURCE":   "origin_source",
+    "ACQUISITION DATE":"acquisition_date",
+    "ACQUISITION COST":"acquisition_cost",
+    "STATUS":          "status"
   },
   "lookups": {
     "breed_id": { "type": "reference", "table": "breeds", "match_on": "name" }
   },
-  "required": ["tag_number"],
+  "required": ["tag_number", "species", "sex"],
+  "required_any": [["date_of_birth", "acquisition_date"]],
+  "legacy_defaults": {
+    "origin": "purchased",
+    "is_legacy": true,
+    "date_of_birth_is_estimated": false
+  },
   "enums": {
     "sex":    ["male", "female", "unknown"],
-    "origin": ["purchased", "local", "newborn"],
-    "status": ["active", "sold", "dead", "archived"]
+    "origin": ["purchased", "local", "newborn", "born_on_farm", "gifted", "transferred_in"],
+    "status": ["active", "sold", "dead", "archived", "deceased", "transferred", "quarantined"]
   }
 }

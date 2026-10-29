@@ -14,6 +14,14 @@ source file/API  →  staging tables  →  validation  →  load into operationa
 - Validation rejects/queues bad rows instead of aborting the whole batch.
 - Successful rows are upserted into `livestock-db` tables.
 
+## Required animal fields
+
+New animal records must supply `tag_number`, `species` and `sex`, plus at least
+one of `date_of_birth` or `acquisition_date`. Imports that cannot provide the
+new required fields are loaded with `legacy_defaults` and flagged
+`is_legacy = true` (see `mappings/animals.example.json`), so quality reports can
+exclude or separate them.
+
 ## Layout
 
 ```

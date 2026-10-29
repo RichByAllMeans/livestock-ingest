@@ -1,4 +1,4 @@
-TAG NO,ANIMAL NAME,SEX,DOB,BREED,ORIGIN,STATUS
-EXT-001,Daisy,female,2021-05-10,Friesian,purchased,active
-EXT-002,Max,male,2020-11-02,Boran,local,active
-EXT-003,Clover,female,2023-02-20,Sahiwal,newborn,active
+TAG NO,RFID,ANIMAL NAME,SPECIES,SEX,DOB,BREED,ORIGIN,ORIGIN SOURCE,ACQUISITION DATE,STATUS
+EXT-001,RFID-EXT-001,Daisy,cattle,female,2021-05-10,Friesian,purchased,Sunrise Farm,2021-06-01,active
+EXT-002,RFID-EXT-002,Max,cattle,male,2020-11-02,Boran,local,Local market,2020-12-01,active
+EXT-003,RFID-EXT-003,Clover,cattle,female,2023-02-20,Sahiwal,newborn,,2023-02-20,active

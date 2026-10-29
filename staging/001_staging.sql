@@ -16,11 +16,19 @@ CREATE TABLE IF NOT EXISTS staging.import_batch (
 
 -- Raw landed rows (jsonb payload, validated later).
 CREATE TABLE IF NOT EXISTS staging.staged_row (
-  id             bigserial PRIMARY KEY,
+  id              bigserial PRIMARY KEY,
   import_batch_id uuid NOT NULL REFERENCES staging.import_batch(id) ON DELETE CASCADE,
-  row_number     integer,
-  payload        jsonb NOT NULL,
-  is_valid       boolean,
-  error_message  text,
-  loaded         boolean NOT NULL DEFAULT false
+  row_number      integer,
+  payload         jsonb NOT NULL,
+  is_valid        boolean,
+  is_legacy       boolean NOT NULL DEFAULT false,
+  quality_flags   jsonb NOT NULL DEFAULT '{}'::jsonb,
+  error_message   text,
+  loaded          boolean NOT NULL DEFAULT false
 );
+
+-- Keep existing staging schemas forward-compatible.
+ALTER TABLE staging.staged_row
+  ADD COLUMN IF NOT EXISTS is_legacy boolean NOT NULL DEFAULT false;
+ALTER TABLE staging.staged_row
+  ADD COLUMN IF NOT EXISTS quality_flags jsonb NOT NULL DEFAULT '{}'::jsonb;
